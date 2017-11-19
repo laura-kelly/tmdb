@@ -22,29 +22,28 @@ Hints:
 */
 
 import React from 'react';
-import { Image, TextInput, Text, View, StyleSheet } from 'react-native';
+import { Image, TextInput, Text, View, StyleSheet, ScrollView} from 'react-native';
 
 class Movie extends React.Component {
   render() {
     return (
       <View style={styles.movie}>
         <Image style={styles.backdrop}
-               source={{uri: "http://image.tmdb.org/t/p/w500/sy3e2e4JwdAtd2oZGA2uUilZe8j.jpg"}} />
+               source={{uri: "http://image.tmdb.org/t/p/w500"+this.props.movie.backdrop_path}} />
         <View style={styles.posterContainer}>
           <Image style={styles.poster}
-                 source={{uri: "http://image.tmdb.org/t/p/w500/5aGhaIHYuQbqlHWvWYqMCnj40y2.jpg"}} />
+                 source={{uri: "http://image.tmdb.org/t/p/w500"+this.props.movie.poster_path}} />
         </View>
         <View style={styles.titleAndVotes}>
-          <Text style={styles.title}>The Martian</Text>
-          <Text style={styles.votes}>7.6</Text>
+          <Text style={styles.title}>{this.props.movie.title}</Text>
+          <Text style={styles.votes}>{this.props.movie.vote_average}</Text>
         </View>
         <Text style={styles.overview}>
-          During a manned mission to Mars, Astronaut Mark Watney is presumed dead after a fierce
-          storm and left behind by his crew. But Watney has survived and finds himself stranded
-          and alone on the hostile planet. With only meager supplies, he must draw upon his ingenuity,
-          wit and spirit to subsist and find a way to signal to Earth that he is alive.
+          {this.props.movie.overview}
         </Text>
+
       </View>
+
     );
   }
 }
@@ -64,8 +63,10 @@ export default class App extends React.Component {
       console.log(json);
       console.log(json.results[0].title);
       this.setState({
+        movieNameInput: "",
         movie: json.results[0]
       });
+          console.log(this.state.movie.id);
     });
 
   }
@@ -87,7 +88,8 @@ export default class App extends React.Component {
                    onSubmitEditing={() => this.movieNameInputSubmitted()}
         />
         {/*Conditionally show the Movie component, only if there's a movie in state (so not initially)*/}
-        {this.state.movie && <Movie />}
+        {this.state.movie && <Movie movie={this.state.movie}/>}
+
       </View>
     );
   }
