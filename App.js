@@ -63,12 +63,10 @@ export default class App extends React.Component {
       console.log(json);
       console.log(json.results[0].title);
       this.setState({
-        movieNameInput: "",
         movie: json.results[0]
       });
-          console.log(this.state.movie.id);
+          this.textInput.clear();
     });
-
   }
 
   movieNameInputChanged(text) {
@@ -82,6 +80,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <TextInput style={styles.movieNameInput}
+                   ref={input => { this.textInput = input }}
                    onChangeText={(text) => this.movieNameInputChanged(text)}
                    placeholder="Enter a movie name!"
                    placeholderTextColor="#aaa"
