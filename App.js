@@ -22,7 +22,7 @@ Hints:
 */
 
 import React from 'react';
-import { Image, TextInput, Text, View, StyleSheet, ScrollView} from 'react-native';
+import { Image, TextInput, Text, View, StyleSheet} from 'react-native';
 
 class Movie extends React.Component {
   render() {
@@ -95,6 +95,8 @@ export default class App extends React.Component {
 }
 
 // Styles. OK to leave alone, unless creativity strikes.
+//Updates:
+//1. Decreased overview font size from 17 to 15 to allow longer overviews to fit.
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -168,7 +170,7 @@ const styles = StyleSheet.create({
     flex: 3,
     color: '#fff',
     width: 360,
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: '300',
     lineHeight: 23,
     marginLeft: 20,
